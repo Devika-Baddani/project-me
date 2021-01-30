@@ -1,0 +1,201 @@
+ <HTML>
+<HEAD>
+	<TITLE> Add/Remove dynamic rows in HTML table </TITLE>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<style>
+		.button{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: red;
+
+		}
+		.button2{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: blue;
+
+		}
+		.button3{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: green;
+
+
+		}
+		.button4{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: indigo;
+
+		}
+		.button5{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: brown;
+
+
+		}
+		.button6{
+			border-radius: 10px;
+			padding: 14px 30px;
+			color: violate;
+		}
+		
+  table {
+
+    border-collapse: collapse;
+    table-layout : auto;
+  }
+  td {
+
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 20px;
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color:#827177;  ;
+  }
+  tr:nth-child(odd) {
+    background-color: #fff;
+  } 
+
+</style> 
+
+	<SCRIPT language="javascript">
+		function addRow(tableID) {
+
+			var table = document.getElementById(tableID);
+
+			var rowCount = (table.rows.length);
+			var rowc=rowCount-1
+			var row = table.insertRow(rowCount);
+
+			var cell1 = row.insertCell(0);
+			var element1 = document.createElement("input");
+			element1.type = "checkbox";
+			element1.name="chkbox"+rowc;
+			cell1.appendChild(element1);
+
+			var cell2 = row.insertCell(1);
+			cell2.innerHTML = rowc + 1;
+
+			var cell3 = row.insertCell(2);
+			var element2 = document.createElement("input");
+			element2.placeholder = "HH:MM:SS"
+			element2.type = "text";
+			element2.name = "time"+rowc;
+			cell3.appendChild(element2);
+			
+			
+			var cell4=row.insertCell(3);
+			var element3=document.createElement("input");
+			element3.placeholder = "enter count"
+			element3.type="text";
+			element3.name="text"+rowc;
+			cell4.appendChild(element3);
+   
+			
+			
+			var cell5= row.insertCell(4);
+			var element4 = document.createElement("select");
+			element4.id = "select"+rowc;
+			element4.name = "select"+rowc;
+			var optarr = ['long bell', 'short bell'];
+			for (var i = 0; i < optarr.length; i++) {
+            var opt = document.createElement("option");
+            opt.text = optarr[i];
+            opt.value = optarr[i];
+            opt.className = optarr[i];
+            element4.appendChild(opt);
+			cell5.appendChild(element4);
+			
+			
+ 			}
+            
+
+		}
+
+		function deleteRow(tableID) {
+			try {
+			var table = document.getElementById(tableID);
+			var rowCount = table.rows.length;
+
+			for(var i=0; i<rowCount; i++) {
+				var row = table.rows[i];
+				var chkbox = row.cells[0].childNodes[0];
+				if(null != chkbox && true == chkbox.checked) {
+					table.deleteRow(i);
+					rowCount--;
+					i--;
+				}
+
+
+			}
+			}catch(e) {
+				alert(e);
+			}
+
+		}
+
+	</SCRIPT>
+</HEAD>
+<BODY>
+	<form id = 'alarm' method = 'POST'>
+	<table style="border:1px solid black;margin-left:auto;margin-right:auto;" id="dataTable" width="350px" border="1">
+	<tr bgcolor="black">
+	<th style="color:#A3173F " >SELECT_DELETE</th>
+	<th style="color:#A3173F " >S.No</th>
+	<b><th style="color:#A3173F " >NAME</th></b>
+	
+	<b><th style="color:#A3173F"  >COUNT</th></b>
+	<b><th style="color:#A3173F">BELL TYPE</th></b>
+<center>
+  <input class="button5" style="font-size:15px;font-weight:bold"type="button"  value="Add Row"  onclick="addRow('dataTable')">
+  <input  class="button4" style="font-size:15px;font-weight:bold"type="button"  value="Delete Row" onclick="deleteRow('dataTable')" />
+  <button class="button" style="font-size:15px"name="external" value="submit"><b>Save</b></button>
+  <button class="button" style="font-size:15px"name="external" value="clear"><b>Delete</b></button>
+  <button class="button" style="font-size:15px"name="external" value="display"><b>Display</b></button>
+  <button class="button6"style="font-size:15px" name="external" value="logout"><b>Logout</b></button>
+ 
+ </center>
+	</tr>
+	<br>
+		<TR>
+			<TD><input type="checkbox" name="chk"/></TD>
+			<TD> 1 </TD>
+			<TD><input type="text" id="time0" name="time0" placeholder="HH:MM:SS" autocomplete="off"/></TD>
+            <TD><input type="text" id="text0" name="text0" placeholder = "enter count" autocomplete="off"/></TD>
+			<TD><select name="select0" placeholder="Select option">
+			<option>short bell</option>
+			<option>long bell</option>
+			
+		</select>
+			</TD>
+			
+		</TR>
+	</table>
+</form>
+
+ <SCRIPT>
+
+ formdata = $('#alarm').serialize();
+ $('#alarm').submit(function(){
+ 	$.ajax({
+ 		type: 'POST',
+        url: '/create',
+        data : formdata,
+        datatype: 'json',
+        contentType: "application/json",
+        success: function(dat){console.log(dat);}
+      });
+})
+
+
+
+</SCRIPT>
+
+</BODY>
+<marquee style="font-size: 25px;">DEVELOPED BY B.DEVIKA, M.VIJAYA LAKSHMI,<b> K.MOUNIKA</b>, S.B.S VARA PRASAD, N.P.ESWAR, STUDENTS OF BSc. MSDS UNDER THE GUIDANCE OF R.VIJAYA MA'AM IN ASSOCIATION WITH CODEGNAN IT SOLUTIONS &#169;&#174;&#8482;.</marquee>
+</HTML>

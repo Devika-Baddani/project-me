@@ -1,0 +1,212 @@
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<style>
+@media screen and (max-width:800px) {
+table{
+
+    border-collapse: collapse;
+    position: fixed;
+    top: 100px;
+    left: 5px;
+    table-layout: fixed;
+    width :320px;
+    scroll-behavior: smooth;
+  }
+  td {
+
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 5px;
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color:#827177;  ;
+  }
+  tr:nth-child(odd) {
+    background-color: #fff;
+  } 
+}
+@media screen and (min-width:800px){
+table{
+
+    border-collapse: collapse;
+    position: fixed;
+    top: 100px;
+    left:150px;
+    table-layout: fixed;
+    width :600px;
+  }
+  td {
+
+    border: 1px solid #ccc;
+  }
+  th, td {
+    padding: 10px;
+    text-align: left;
+  }
+  tr:nth-child(even) {
+    background-color:#827177;  ;
+  }
+  tr:nth-child(odd) {
+    background-color: #fff;
+  }
+  } 
+.label1{
+    padding : 14px 20px;
+    font-size: 25px;
+    margin-left: 800px;
+    margin-top: -100px;
+}
+.label2{
+    padding : 14px 20px;
+    font-size: 20px;
+    margin-left: 815px;
+    margin-top: -100px;
+}
+.label3{
+    padding : 14px 20px;
+    font-size: 20px;
+    margin-left: 800px;
+    margin-top: -100px;
+}
+.label{
+    padding : 14px 20px;
+    font-size: 20px;
+    margin-left: 800px;
+  }
+.timetable{
+  font-size: 15px;
+}
+.button{
+      border-radius: 10px;
+      padding: 14px 30px;
+      color: red;
+      margin-left: 600px;
+      margin-top: -50px;
+    }
+    .button2{
+      border-radius: 10px;
+      padding: 14px 30px;
+      color: blue;
+      margin-left: 1200px;
+      margin-top: 10px;
+    }
+    .button3{
+      border-radius: 10px;
+      padding: 14px 30px;
+      color: green;
+      margin-left: 900px;
+      margin-top: -50px;
+
+
+
+    }
+    .button4{
+      border-radius: 10px;
+      padding: 14px 30px;
+      color: indigo;
+    }
+    .button5{
+      border-radius: 10px;
+      padding: 14px 30px;
+      color: brown;
+
+
+    }
+    .button6{
+      border-radius: 10px;
+      padding: 14px 20px;
+      color: violate;
+      margin-top: -100px;
+      margin-left: 1300px;
+    }
+    .form-control{
+      border-radius: 10px;
+      padding: 5px 10px;
+    }
+    .p1{
+      margin-left: 800px;
+    }
+    .label5{
+      font-size: 20px;
+    } 
+               
+</style>
+<div class="SNo"></div>
+</head>
+<body>  
+<form id="schedule" method="post">
+<br>
+<center><h1>Schedules In The Bell</h1></center>
+<center><table style="border:1px solid black" id="schedules" border="1" width = "500px"></center>
+    <tr>
+        <th style="color:#A3173F " >S.No</th>
+        <th style="color:#A3173F " >NAME</th> 
+        <th style="color:#A3173F " >PURPOSE</th>
+        <!--<th style="color:#A3173F " >END DATE</th>-->
+      </tr>
+        {% for item in items %}
+            <tr>
+                <td>{{item.SNO}}</td>
+                <td>{{item.NAME}}</td>
+                <td>{{item.PURPOSE}}</td>
+                <!--<td>{{item.COUNT}}</td>-->
+            </tr>
+        {% endfor %}        
+  <!--<button class="button" name="external" value="submit">Scheduler</button>
+  <button class="button2" name="external" value="clear">Delete</button>
+  <button class="button3" name="external" value="display">Alarm List</button>-->
+</table>
+</form>
+<form action = "/decision"  method = "post" class="form1">
+  <button class="button6"style="font-size:15px" name="external" value="logout"><b>Logout</b></button><br>
+  <label class = "label1">SCHEDULE A TIMETABLE</label><br><br>
+  <label class = "label">NAME OF THE TIMETABLE:</label>
+    <input type = "text", name = "time_table", class = "form-control" placeholder= "Timetable Name" id = "timetablename"/><br>
+  <p class = "p1"> 
+      <label class= "label5">START:</label>
+        <input type="date" name="start_Date" id="startDate" class="form-control"/>
+      <label class= "label5">END:</label>
+        <input type="date" name="End_Date" id="endDate" class="form-control" />
+  </p>
+  <button class="button2" style="font-size:15px"name="external" value="submit"><b>Schedule</b></button>
+  <button class="button3" style="font-size:15px"name="external" value="clear"><b>Delete</b></button>
+  <button class="button" style="font-size:15px"name="external" value="display"><b>Display</b></button><br><br>
+</form>
+<form action = "/decision" name = "form2" method = "post" onsubmit="return validate1()">
+  <label class = "label3">OR</label><br>
+  <label class = "label1">CREATE A NEW TIMETABLE</label><br><br>
+  <label class = "label">NAME FOR TIMETABLE:</label>
+    <input type = "text", name = "time_table_create", class = "form-control" placeholder= "Timetable Name" id = "timetablename"/><br><br>
+  <label class = "label2">TIMETABLE PURPOSE:</label>
+    <input type = "text", name = "time_table_purpose", class = "form-control" placeholder= "Timetable Purpose" id = "timetablepurpose"/>
+  <button class="button4" type="submit" name="external" value="create" style="margin-left: 1200px; margin-top: 20px" >CREATE</button>
+</form>
+<script >
+function validate1(){
+    var timetable = document.getElementById('time_table_create').value;
+    var purpose =document.getElementById('time_table_purpose').value;
+    if(timetable=="" || purpose==""){
+      alert("please fill timetable name and purpose");
+      window.location.reload();
+      return false;
+    }
+  }
+//formdata = $('#alarm').serialize();
+//$('#alarm').submit(function(){
+  //$.ajax({
+          //type: 'POST',
+          //url: '/create',
+            //data : formdata,
+            //datatype: 'json',
+            //contentType: "application/json",
+            //success: function(dat){console.log(dat);}
+        //});
+//})
+
+</script>
+</body>
+</html>

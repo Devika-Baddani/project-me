@@ -1,0 +1,39 @@
+<head>
+	<title>Schedular</title>
+<style>
+	.label{
+		padding : 14px 20px;
+		font-size: 20px;
+	}
+	.timetable{
+		padding: 14px 20px;
+		color: blue;
+		border-radius: 10px;
+
+	}
+	.timetable_purpose{
+		padding: 14px 20px;
+		color: blue;
+		border-radius: 10px;
+	}
+	.button{
+		border-radius: 10px;
+		padding: 14px 30px;
+		color: blue;
+	}
+</style>
+	
+</head>
+<form action = "/dynamic" method = "post" name = "form1">
+	<br>
+<center><h1>YOU HAVE NONE TIMETABLES TO SCHEDULE</h1>
+<h1>CREATE ONE</h1></center>
+<p align = "center">
+<label class = "label">NAME FOR TIMETABLE:</label>
+<input type = "text", name = "time_table", class = "timetable" placeholder= "Timetable Name" id = "timetablename" autocomplete="off" required/>
+<label class = "label">TIMETABLE PURPOSE:</label>
+<input type = "text", name = "time_table_purpose", class = "timetable_purpose" placeholder= "Timetable Purpose" id = "timetablepurpose" autocomplete="off" required/>
+</p>
+<br>
+<button class="button" type="submit" name="decision" value="create" style="margin-left: 800px; margin-top: 50px">CREATE</button>
+</form>
