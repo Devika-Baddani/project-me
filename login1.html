@@ -1,20 +1,37 @@
 <head>
 	<title>Schedular</title>
 <style>
+	#loginbox{
+		width:500px;
+		height:500px;
+		box-sizing: border-box;
+		border:10px solid grey;
+		border-radius: 30px;
+		background-color: white;
+		margin-top: 50px;
+		background:transparent;
+
+		}
 	.label{
 		padding : 14px 20px;
 		font-size: 20px;
+		margin-top: 10px;
+		
 	}
 	.timetable{
 		padding: 14px 20px;
 		color: blue;
 		border-radius: 10px;
+		margin-top: 10px;
+		
 
 	}
 	.timetable_purpose{
 		padding: 14px 20px;
 		color: blue;
 		border-radius: 10px;
+		margin-left: 10px
+		margin-top:10px;
 	}
 	.button{
 		border-radius: 10px;
@@ -24,16 +41,23 @@
 </style>
 	
 </head>
-<form action = "/dynamic" method = "post" name = "form1">
 	<br>
-<center><h1>YOU HAVE NONE TIMETABLES TO SCHEDULE</h1>
-<h1>CREATE ONE</h1></center>
-<p align = "center">
-<label class = "label">NAME FOR TIMETABLE:</label>
-<input type = "text", name = "time_table", class = "timetable" placeholder= "Timetable Name" id = "timetablename" autocomplete="off" required/>
-<label class = "label">TIMETABLE PURPOSE:</label>
-<input type = "text", name = "time_table_purpose", class = "timetable_purpose" placeholder= "Timetable Purpose" id = "timetablepurpose" autocomplete="off" required/>
-</p>
-<br>
-<button class="button" type="submit" name="decision" value="create" style="margin-left: 800px; margin-top: 50px">CREATE</button>
-</form>
+	<body>
+<center><h1 style="color: red">YOU HAVE NONE TIMETABLES TO SCHEDULE</h1>
+	<div id="loginbox">
+		<form action = "/dynamic" method = "post" name = "form1">
+			<h1>CREATE ONE</h1></center>
+			<p align = "center">
+				<label class= "label">NAME FOR TIMETABLE:</label>
+				<input type = "text", name = "time_table", class = "timetable" placeholder= "Timetable Name" class= "timetablename" autocomplete="off" style="margin-top: 10px" required/><br><br>
+				<label class= "label">TIMETABLE PURPOSE:</label>
+				<input type = "text", name = "time_table_purpose", class = "timetable_purpose" placeholder= "Timetable Purpose" id = "timetablepurpose" autocomplete="off" required/>
+			</p>
+			<br>
+			<center><button class="button" type="submit" name="decision" value="create" style=" margin-top: -5px">CREATE</button></center>
+		</form>
+	</div>
+</center>
+</body>
+
+
